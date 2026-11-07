@@ -23,6 +23,10 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
+      - name: Restore bundled background image
+        run: |
+          mkdir -p app/src/main/assets
+          base64 --decode app/src/main/assets/timer_background.jpg.b64 > app/src/main/assets/timer_background.jpg
       - name: Build debug APK
         run: gradle --no-daemon assembleDebug
       - name: Upload APK
