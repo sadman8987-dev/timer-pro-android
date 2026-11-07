@@ -8,6 +8,8 @@ import android.os.SystemClock
 import android.media.AudioManager
 import android.media.ToneGenerator
 import android.graphics.Color
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.Typeface
 import android.view.Gravity
 import android.view.View
@@ -50,6 +52,11 @@ class MainActivity : Activity() {
             setPadding(dp(22), dp(25), dp(22), dp(20))
             setBackgroundColor(bg)
             layoutDirection = View.LAYOUT_DIRECTION_RTL
+        }
+        root.background = try {
+            BitmapDrawable(resources, assets.open("timer_background.jpg").use { BitmapFactory.decodeStream(it) }).apply { alpha = 170 }
+        } catch (_: Exception) {
+            android.graphics.drawable.ColorDrawable(bg)
         }
         root.addView(label("TIMER PRO",25f,white,true).apply { gravity = Gravity.CENTER }, match())
         root.addView(label("مؤقتك اليومي — يعمل بدون إنترنت",14f,muted).apply {
